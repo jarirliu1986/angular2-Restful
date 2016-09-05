@@ -1,11 +1,15 @@
 import {Component} from 'angular2/core';
+import {NavBarComponent} from "./navbar.component";
 // import {OnInit} from 'angular2/core';
 // import {PostService} from "./post.service";
 // import {HTTP_PROVIDERS} from "angular2/http";
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    template: `
+        <navbar></navbar>
+    `,
+    directives:[NavBarComponent]
     //providers : [PostService, HTTP_PROVIDERS]
 })
 export class AppComponent{}
