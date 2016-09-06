@@ -1,8 +1,10 @@
 import {Component, OnInit} from "angular2/core";
 import {PostService} from "./post.service";
+import {SpinnerComponent} from "./spinner.component";
 
 @Component({
     templateUrl:'app/posts.component.html',
+    directives: [SpinnerComponent],
     providers: [PostService]
 })
 
