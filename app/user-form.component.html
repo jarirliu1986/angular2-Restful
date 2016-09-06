@@ -1,7 +1,7 @@
 <h1 class="col-md-offset-5">Add a User</h1>
 <div class="row">
     <div class="col-md-6 col-md-offset-3 well">
-        <form [ngFormModel]="form">
+        <form [ngFormModel]="form" (ngSubmit)="save()">
             <fieldset>
                 <legend>
                     User

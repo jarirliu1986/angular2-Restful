@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "./basicValidators"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/common", "./basicValidators", "angular2/router", "./users.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "angular2/common", "./basicValidators"], funct
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, basicValidators_1;
+    var core_1, common_1, basicValidators_1, router_1, users_service_1;
     var UserFormComponent;
     return {
         setters:[
@@ -22,10 +22,18 @@ System.register(["angular2/core", "angular2/common", "./basicValidators"], funct
             },
             function (basicValidators_1_1) {
                 basicValidators_1 = basicValidators_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (users_service_1_1) {
+                users_service_1 = users_service_1_1;
             }],
         execute: function() {
             UserFormComponent = (function () {
-                function UserFormComponent(fb) {
+                function UserFormComponent(fb, _router, _userService) {
+                    this._router = _router;
+                    this._userService = _userService;
                     this.form = fb.group({
                         name: ['', common_1.Validators.required],
                         email: ['', basicValidators_1.BasicValidators.email],
@@ -44,11 +52,19 @@ System.register(["angular2/core", "angular2/common", "./basicValidators"], funct
                     }
                     return true;
                 };
+                UserFormComponent.prototype.save = function () {
+                    var _this = this;
+                    this._userService.addUser(this.form.value).subscribe(function (x) {
+                        //set this.form.markAsPristine()
+                        _this._router.navigate(['Users']);
+                    });
+                };
                 UserFormComponent = __decorate([
                     core_1.Component({
-                        templateUrl: 'app/user-form.component.html'
+                        templateUrl: 'app/user-form.component.html',
+                        providers: [users_service_1.UserService]
                     }), 
-                    __metadata('design:paramtypes', [common_1.FormBuilder])
+                    __metadata('design:paramtypes', [common_1.FormBuilder, router_1.Router, users_service_1.UserService])
                 ], UserFormComponent);
                 return UserFormComponent;
             }());
