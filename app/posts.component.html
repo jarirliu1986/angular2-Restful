@@ -1,11 +1,26 @@
-<h1 class="col-md-6 col-md-offset-5">Posts</h1>
+<h1>Posts</h1>
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6">
         <spinner [visible]="isLoading"></spinner>
         <ul class="list-group">
-            <li *ngFor="#post of posts" class="list-group-item">
+            <li *ngFor="#post of posts"
+                class="list-group-item"
+                [class.active]="currentPost == post"
+                (click)="select(post)">
                 {{ post.title }}
             </li>
         </ul>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentPost" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    {{ currentPost.title }}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {{ currentPost.body }}
+            </div>
+        </div>
     </div>
 </div>
