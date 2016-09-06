@@ -71,7 +71,12 @@ System.register(["angular2/core", "angular2/common", "./basicValidators", "angul
                 };
                 UserFormComponent.prototype.save = function () {
                     var _this = this;
-                    this._userService.addUser(this.form.value).subscribe(function (x) {
+                    var result;
+                    if (this.user.id)
+                        result = this._userService.updateUser(this.user);
+                    else
+                        result = this._userService.addUser(this.user);
+                    result.subscribe(function (x) {
                         //set this.form.markAsPristine()
                         _this._router.navigate(['Users']);
                     });
